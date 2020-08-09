@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
-const {sequelize} = require('./models');
+// const { sequelize } = require('./models');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -13,7 +13,7 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 // sequelize sync();
-sequelize.sync();
+// sequelize.sync();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
