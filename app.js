@@ -5,22 +5,24 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const {sequelize} = require('./models');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
 
+// sequelize sync();
+sequelize.sync();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 if (process.env.NODE_ENV === 'production') {
   app.use(logger('combined'));
 } else {
   app.use(logger('dev'));
 }
-
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
