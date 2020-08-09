@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -13,7 +15,14 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(logger('combined'));
+} else {
+  app.use(logger('dev'));
+}
+
+app.use(cors());
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
